@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="DsHKDH" name="FilterBasics" projectType="audioplug" useAppConfig="0"
+              jucerFormatVersion="1">
+  <MAINGROUP id="J928KQ" name="FilterBasics">
+    <GROUP id="{8D954F14-8ADB-9803-3FB8-2DD37E069A30}" name="Source">
+      <GROUP id="{07509302-7544-2362-FFD0-4616805836AA}" name="Gui">
+        <FILE id="GrQCDC" name="FirFilterComponent.cpp" compile="1" resource="0"
+              file="Source/Gui/FirFilterComponent.cpp"/>
+        <FILE id="jyNRXX" name="FirFilterComponent.h" compile="0" resource="0"
+              file="Source/Gui/FirFilterComponent.h"/>
+        <FILE id="kwi23K" name="FrequencyResponsePlot.cpp" compile="1" resource="0"
+              file="Source/Gui/FrequencyResponsePlot.cpp"/>
+        <FILE id="aG3tal" name="FrequencyResponsePlot.h" compile="0" resource="0"
+              file="Source/Gui/FrequencyResponsePlot.h"/>
+        <FILE id="eO7fbQ" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/Gui/LookAndFeel.cpp"/>
+        <FILE id="pIVsX6" name="LookAndFeel.h" compile="0" resource="0" file="Source/Gui/LookAndFeel.h"/>
+        <FILE id="HtHCiY" name="PhaseResponsePlot.cpp" compile="1" resource="0"
+              file="Source/Gui/PhaseResponsePlot.cpp"/>
+        <FILE id="cDiHf1" name="PhaseResponsePlot.h" compile="0" resource="0"
+              file="Source/Gui/PhaseResponsePlot.h"/>
+        <FILE id="Q2wR3e" name="Plot.cpp" compile="1" resource="0" file="Source/Gui/Plot.cpp"/>
+        <FILE id="HjX34i" name="Plot.h" compile="0" resource="0" file="Source/Gui/Plot.h"/>
+      </GROUP>
+      <FILE id="W1v1jb" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="qJFA9H" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="i7x2jf" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="jHT2CH" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+    <GROUP id="{47DCCAAC-DEDA-4FB7-C528-AAB550BDB519}" name="Resources">
+      <FILE id="IyDqQZ" name="FirFilter.png" compile="0" resource="1" file="Resources/FirFilter.png"/>
+      <FILE id="gSZUOB" name="FirFilter.svg" compile="0" resource="1" file="Resources/FirFilter.svg"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="FilterBasics"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="FilterBasics"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../JUCE/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
