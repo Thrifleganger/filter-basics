@@ -19,8 +19,11 @@ void FrequencyResponsePlot::refresh()
     const float logDataSize = log10(data.size());
     for (int i = 0; i < data.size(); i++)
     {
+        auto value = data[i];
+        if (isnan(value) || isinf(value))
+            value = 1.f;
         const auto x = jmap(jlimit(0.f, logDataSize, log10((float)i)), 0.f, logDataSize, 0.f, 1.f);
-        const auto y = jmap(Decibels::gainToDecibels(data[i]), minDb, maxDb, 1.f, 0.f);
+        const auto y = jmap(Decibels::gainToDecibels(value), minDb, maxDb, 1.f, 0.f);
         if (i == 0)
             path.startNewSubPath(x, y);
         else 

@@ -18,7 +18,10 @@ void PhaseResponsePlot::refresh()
     for (int i = 0; i < data.size(); i++)
     {
         const auto x = jmap((float)i, 0.f, (float)data.size(), 0.f, 1.f);
-        const auto y = jmap(data[i], -360.f, 360.f, 0.f, 1.f);
+        auto value = data[i];
+        if (isnan(value) || isinf(value))
+            value = 360.f;
+        const auto y = jmap(value, -360.f, 360.f, 0.f, 1.f);
         if (i == 0)
             path.startNewSubPath(x, y);
         else 

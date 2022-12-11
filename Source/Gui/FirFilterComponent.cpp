@@ -13,8 +13,8 @@
 FirFilterComponent::FirFilterComponent(FilterBasicsAudioProcessor& processor) :
     processor(processor),
     valueTreeState(processor.getValueTreeState()),
-    magnitudeResponsePlot([&] { return processor.getFirMagnitudeResponse(); }),
-    phaseResponsePlot([&] { return processor.getFirPhaseResponse(); })
+    magnitudeResponsePlot([&] { return processor.getMagnitudeResponse(); }),
+    phaseResponsePlot([&] { return processor.getPhaseResponse(); })
 {
     const auto configureSlider = [&](Slider& slider, const String& id, Label& label)
     {
@@ -95,7 +95,7 @@ void FirFilterComponent::timerCallback()
 {
     if (shouldRefreshGraphs)
     {
-        processor.calculateFirImpulseResponse();
+        processor.calculateImpulseResponse(Topology::FIR);
         magnitudeResponsePlot.refresh();
         phaseResponsePlot.refresh();
         shouldRefreshGraphs = false;

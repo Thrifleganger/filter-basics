@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "LookAndFeel.h"
+#include <algorithm>
 
 class Plot : public Component
 {
