@@ -10,7 +10,22 @@ public:
     void setCoefficients(float a0, float a1);
 private:
     std::vector<float> channelRegister;
-    float coeffA0{ 0.5f }, coeffA1{ 0.5f };
+    float a0{ 0.5f }, a1{ 0.5f };
+};
+
+class IirFilter
+{
+public:
+    void prepare(int numChannels);
+    void process(AudioBuffer<float>& buffer);
+    void setCoefficients(float a0, float a1, float b1);
+private:
+    std::vector<float> channelRegister;
+    float a0{ 0.5f }, a1{ 0.5f }, b1{ 0.5f };
+};
+
+enum class Topology {
+    FIR, IIR
 };
 
 class FilterBasicsAudioProcessor  : public juce::AudioProcessor, public AudioProcessorValueTreeState::Listener
@@ -58,9 +73,9 @@ public:
 
     AudioProcessorValueTreeState& getValueTreeState() { return valueTreeState; };
 
-    void calculateFirImpulseResponse();
-    std::vector<float> getFirMagnitudeResponse();
-    std::vector<float> getFirPhaseResponse();
+    void calculateImpulseResponse(Topology topology);
+    std::vector<float> getMagnitudeResponse();
+    std::vector<float> getPhaseResponse();
 
 private:
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
@@ -69,11 +84,12 @@ private:
     AudioBuffer<float> impulse;
     std::vector<dsp::Complex<float>> impulseResponse, impulseFft;
     FirFilter firFilter, firAnalysisFilter;
+    IirFilter iirFilter, iirAnalysisFilter;
     dsp::FFT fft;
     dsp::WindowingFunction<float> window;
     float sampleRate;
 
-    const int fftOrder = 11;
+    static constexpr int fftOrder{ 11 };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterBasicsAudioProcessor)
 };

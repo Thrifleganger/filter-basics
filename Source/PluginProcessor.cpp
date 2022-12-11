@@ -22,18 +22,48 @@ void FirFilter::process(AudioBuffer<float>& buffer)
         for (auto sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             const auto currentSample = buffer.getReadPointer(channel)[sample];
-            buffer.getWritePointer(channel)[sample] = coeffA0 * currentSample + coeffA1 * channelRegister[channel];
+            buffer.getWritePointer(channel)[sample] = a0 * currentSample + a1 * channelRegister[channel];
             channelRegister[channel] = currentSample;
         }
     }
 }
 
-void FirFilter::setCoefficients(float a0, float a1)
+void FirFilter::setCoefficients(float coeffA0, float coeffA1)
 {
-    coeffA0 = a0;
-    coeffA1 = a1;
+    a0 = coeffA0;
+    a1 = coeffA1;
 }
 
+
+void IirFilter::prepare(int numChannels)
+{
+    channelRegister.clear();
+    channelRegister.resize(numChannels, 0.f);
+}
+
+void IirFilter::process(AudioBuffer<float> &buffer)
+{
+    for (auto channel = 0; channel < buffer.getNumChannels(); channel++)
+    {
+        for (auto sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            const auto currentSample = buffer.getReadPointer(channel)[sample];
+            auto v = currentSample - b1 * channelRegister[channel];
+            if (isinf(v) || isnan(v))
+                v = 10.f;
+            auto output = a0 * v + a1 * channelRegister[channel];
+            channelRegister[channel] = v;
+            buffer.getWritePointer(channel)[sample] = output;
+        }
+    }
+}
+
+void IirFilter::setCoefficients(float coeffA0, float coeffA1, float coeffB1)
+{
+    a0 = coeffA0;
+    a1 = coeffA1;
+    b1 = coeffB1;
+}
 
 //==============================================================================
 FilterBasicsAudioProcessor::FilterBasicsAudioProcessor()
@@ -52,12 +82,20 @@ FilterBasicsAudioProcessor::FilterBasicsAudioProcessor()
 {
     valueTreeState.addParameterListener("firCoeffA0", this);
     valueTreeState.addParameterListener("firCoeffA1", this);
+
+    valueTreeState.addParameterListener("iirCoeffA0", this);
+    valueTreeState.addParameterListener("iirCoeffA1", this);
+    valueTreeState.addParameterListener("iirCoeffB1", this);
 }
 
 FilterBasicsAudioProcessor::~FilterBasicsAudioProcessor()
 {
     valueTreeState.removeParameterListener("firCoeffA0", this);
     valueTreeState.removeParameterListener("firCoeffA1", this);
+
+    valueTreeState.removeParameterListener("iirCoeffB1", this);
+    valueTreeState.removeParameterListener("iirCoeffA1", this);
+    valueTreeState.removeParameterListener("iirCoeffA0", this);
 }
 
 //==============================================================================
@@ -134,6 +172,17 @@ void FilterBasicsAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
         firAnalysisFilter.prepare(1);
         firAnalysisFilter.setCoefficients(a0, a1);
     }
+
+    {
+        const auto a0 = valueTreeState.getRawParameterValue("iirCoeffA0")->load();
+        const auto a1 = valueTreeState.getRawParameterValue("iirCoeffA1")->load();
+        const auto b1 = valueTreeState.getRawParameterValue("iirCoeffB1")->load();
+        iirFilter.prepare(getTotalNumInputChannels());
+        iirFilter.setCoefficients(a0, a1, b1);
+
+        iirAnalysisFilter.prepare(1);
+        iirAnalysisFilter.setCoefficients(a0, a1, b1);
+    }
     
 
     impulse.setSize(1, fft.getSize(), false);
@@ -174,10 +223,9 @@ bool FilterBasicsAudioProcessor::isBusesLayoutSupported (const BusesLayout& layo
 void FilterBasicsAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    firFilter.process(buffer);
+    //firFilter.process(buffer);
+    //iirFilter.process(buffer);
 }
 
 //==============================================================================
@@ -211,19 +259,24 @@ AudioProcessorValueTreeState::ParameterLayout FilterBasicsAudioProcessor::create
         std::make_unique<AudioParameterFloat>(ParameterID{"firCoeffA0", 1}, "FIR Coefficient A0", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
         std::make_unique<AudioParameterFloat>(ParameterID{"firCoeffA1", 1}, "FIR Coefficient A1", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
         std::make_unique<AudioParameterFloat>(ParameterID{"iirCoeffA0", 1}, "IIR Coefficient A0", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
-        std::make_unique<AudioParameterFloat>(ParameterID{"iirCoeffA1", 1}, "IIR Coefficient A1", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f)
+        std::make_unique<AudioParameterFloat>(ParameterID{"iirCoeffA1", 1}, "IIR Coefficient A1", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
+        std::make_unique<AudioParameterFloat>(ParameterID{"iirCoeffB1", 1}, "IIR Coefficient B1", NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f)
     };
 }
 
-void FilterBasicsAudioProcessor::calculateFirImpulseResponse()
+void FilterBasicsAudioProcessor::calculateImpulseResponse(Topology topology)
 {
     // Create impulse signal
     impulse.setSample(0, 0, 1.f);
     for (int sample = 1; sample < fft.getSize(); sample++)
         impulse.setSample(0, sample, 0.f);
 
-    // Filter impulse signal 
-    firAnalysisFilter.process(impulse);
+    // Filter impulse signal
+    if (topology == Topology::FIR)
+        firAnalysisFilter.process(impulse);
+    else
+        iirAnalysisFilter.process(impulse);
+
     for (int sample = 0; sample < impulse.getNumSamples(); sample++)
     {
         impulseResponse[sample] = dsp::Complex<float>{ impulse.getReadPointer(0)[sample], 0.f };
@@ -231,7 +284,7 @@ void FilterBasicsAudioProcessor::calculateFirImpulseResponse()
     fft.perform(impulseResponse.data(), impulseFft.data(), false);
 }
 
-std::vector<float> FilterBasicsAudioProcessor::getFirMagnitudeResponse()
+std::vector<float> FilterBasicsAudioProcessor::getMagnitudeResponse()
 {
     std::vector<float> magnitudeArray;
     magnitudeArray.resize(impulseFft.size() / 2, 0.f);
@@ -240,7 +293,7 @@ std::vector<float> FilterBasicsAudioProcessor::getFirMagnitudeResponse()
     return magnitudeArray;
 }
 
-std::vector<float> FilterBasicsAudioProcessor::getFirPhaseResponse()
+std::vector<float> FilterBasicsAudioProcessor::getPhaseResponse()
 {
     std::vector<float> phaseArray;
     phaseArray.resize(impulseFft.size() / 2, 0.f);
@@ -268,5 +321,15 @@ void FilterBasicsAudioProcessor::parameterChanged(const String& parameterID, flo
         firFilter.setCoefficients(valueTreeState.getRawParameterValue("firCoeffA0")->load(), newValue);
         firAnalysisFilter.setCoefficients(valueTreeState.getRawParameterValue("firCoeffA0")->load(), newValue);
     }
-        
+    {
+        const auto a0 = valueTreeState.getRawParameterValue("iirCoeffA0")->load();
+        const auto a1 = valueTreeState.getRawParameterValue("iirCoeffA1")->load();
+        const auto b1 = valueTreeState.getRawParameterValue("iirCoeffB1")->load();
+        if (parameterID.containsIgnoreCase({"iir"}))
+        {
+            iirFilter.setCoefficients(a0, a1, b1);
+            iirAnalysisFilter.setCoefficients(a0, a1, b1);
+        }
+    }
+
 }

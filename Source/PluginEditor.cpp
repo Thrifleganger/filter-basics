@@ -10,10 +10,10 @@
 #include "PluginEditor.h"
 
 FilterBasicsAudioProcessorEditor::FilterBasicsAudioProcessorEditor (FilterBasicsAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), firFilterComponent(p)
+    : AudioProcessorEditor (&p), audioProcessor (p), firFilterComponent(p), iirFilterComponent(p)
 {
-    tab.addTab("Asd Filter", Theme::darkBackground.darker(), &firFilterComponent, false);
-    tab.addTab("IIR Filter", Theme::darkBackground.darker(), new Component(), true);
+    tab.addTab("FIR Filter", Theme::darkBackground.darker(), &firFilterComponent, false);
+    tab.addTab("IIR Filter", Theme::darkBackground.darker(), &iirFilterComponent, false);
     addAndMakeVisible(tab);
 
     setLookAndFeel(&lookAndFeel);

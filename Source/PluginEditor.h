@@ -4,6 +4,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "Gui/FirFilterComponent.h"
+#include "Gui/IirFilterComponent.h"
 
 class FilterBasicsAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
@@ -17,6 +18,7 @@ public:
 private:
     FilterBasicsAudioProcessor& audioProcessor;
     FirFilterComponent firFilterComponent;
+    IirFilterComponent iirFilterComponent;
     TabbedComponent tab{TabbedButtonBar::Orientation::TabsAtTop};
     CustomLookAndFeel lookAndFeel;
 

@@ -12,7 +12,7 @@ namespace BinaryData
     const int            FirFilter_pngSize = 20791;
 
     extern const char*   FirFilter_svg;
-    const int            FirFilter_svgSize = 2400;
+    const int            FirFilter_svgSize = 2360;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
     const int namedResourceListSize = 2;
