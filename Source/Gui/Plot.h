@@ -30,4 +30,6 @@ protected:
     bool isMouseDownOnScope{ false };
     Point<int> mousePosition;
     float sampleRate{ 44100 };
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Plot)
 };

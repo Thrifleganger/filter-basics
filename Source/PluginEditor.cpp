@@ -9,12 +9,30 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-FilterBasicsAudioProcessorEditor::FilterBasicsAudioProcessorEditor (FilterBasicsAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), firFilterComponent(p), iirFilterComponent(p)
+CustomTabbedComponent::CustomTabbedComponent(FilterBasicsAudioProcessor& p) :
+    TabbedComponent(TabbedButtonBar::Orientation::TabsAtTop),
+    processor(p)
+{}
+
+void CustomTabbedComponent::currentTabChanged(int newCurrentTabIndex, const String& newCurrentTabName)
+{
+    // TabbedComponent internally calls currentTabChanged when adding the very first tab. Which is a dick move.
+    if (getNumTabs() < 2)
+        return;
+    processor.setCurrentProcessorIndex(newCurrentTabIndex);
+}
+
+FilterBasicsAudioProcessorEditor::FilterBasicsAudioProcessorEditor (FilterBasicsAudioProcessor& p) :
+    AudioProcessorEditor (&p),
+    audioProcessor (p),
+    firFilterComponent(p),
+    iirFilterComponent(p),
+    tab(p)
 {
     tab.addTab("FIR Filter", Theme::darkBackground.darker(), &firFilterComponent, false);
     tab.addTab("IIR Filter", Theme::darkBackground.darker(), &iirFilterComponent, false);
     addAndMakeVisible(tab);
+    tab.setCurrentTabIndex(audioProcessor.getCurrentProcessorIndex(), false);
 
     setLookAndFeel(&lookAndFeel);
 

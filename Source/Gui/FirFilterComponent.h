@@ -36,4 +36,6 @@ private:
     FrequencyResponsePlot magnitudeResponsePlot;
     PhaseResponsePlot phaseResponsePlot;
     bool shouldRefreshGraphs{ true };
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FirFilterComponent)
 };
