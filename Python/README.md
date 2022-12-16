@@ -10,6 +10,6 @@ Download and install `python3` and `pip` from https://www.python.org/
 
 ### Running Jupyter Notebook
 
-With this as the rot folder, run the following command on your terminal window:
+With this as the root folder, run the following command on your terminal window:
 
 `jupyter notebook`
