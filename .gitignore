@@ -1,3 +1,6 @@
+.DS_Store
 **/Builds/
+**/JuceLibraryCode/
+**/.ipynb_checkpoints/
 *.exe
 *.pkg

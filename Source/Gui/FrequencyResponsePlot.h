@@ -15,4 +15,6 @@ protected:
 
     static constexpr float maxDb{ 10.f };
     static constexpr float minDb{ -90.f };
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FrequencyResponsePlot)
 };

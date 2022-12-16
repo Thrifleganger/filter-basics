@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1052.5 523.6" style="enable-background:new 0 0 1052.5 523.6;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#4D258F;stroke-width:6.5009;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{display:none;fill:none;stroke:#4D258F;stroke-width:6.5009;stroke-linecap:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:6.5009;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#8F253B;stroke-width:6.1777;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#8F253B;stroke-width:6.1532;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#8F253B;stroke-width:6.7544;stroke-miterlimit:10;}
+	.st6{fill:#4D258F;}
+	.st7{font-family:'PalatinoLinotype-Italic';}
+	.st8{font-size:68.8948px;}
+	.st9{letter-spacing:-1;}
+	.st10{font-size:40.1657px;}
+	.st11{display:none;fill:#4D258F;enable-background:new    ;}
+	.st12{font-size:58.5815px;}
+	.st13{font-size:34.153px;}
+	.st14{fill:none;stroke:#8F253B;stroke-width:6.3038;stroke-miterlimit:10;}
+	.st15{font-size:64.2992px;}
+</style>
+<line class="st0" x1="220.3" y1="107.8" x2="0" y2="107.8"/>
+<path class="st0" d="M911.6,304.5v102.2c0,8.2-6.7,14.9-14.9,14.9H779.4"/>
+<line class="st0" x1="911.6" y1="200.8" x2="911.6" y2="107.8"/>
+<polyline class="st0" points="355.4,107.3 461.7,107.3 412.3,86.5 433.1,107.3 "/>
+<path class="st1" d="M213.2,314.3v93.5c0,13.6,11,24.5,24.5,24.5h219.9l-45.5-19.5l18.2,19.5"/>
+<path class="st0" d="M650,421.6h-79c-12.4,0-18.7-8.6-18.7-19.2V196.9l-14.4,33.8l11.7-9.1"/>
+<line class="st0" x1="630.6" y1="107.3" x2="1052.5" y2="107.3"/>
+<path class="st2" d="M863.3,210.6"/>
+<polygon class="st3" points="779.4,484.4 779.4,347 650,421.5 "/>
+<polygon class="st4" points="222.5,358.2 222.5,495.1 351.4,420.9 "/>
+<g>
+	<path class="st5" d="M997.4,301H831c-3.5,0-6.3-2.8-6.3-6.3v-85.4c0-3.5,2.8-6.3,6.3-6.3h166.4c3.5,0,6.3,2.8,6.3,6.3v85.4
+		C1003.7,298.2,1000.9,301,997.4,301z"/>
+	<text transform="matrix(1 0 0 1 883.4668 273.2148)" class="st6 st7 st8 st9">z</text>
+	<text transform="matrix(1 0 0 1 911.6348 250.2734)" class="st6 st7 st10">-1</text>
+</g>
+<path class="st0" d="M100.9,304.5v99.4c0,9.8,7.9,17.7,17.7,17.7h101.8"/>
+<line class="st0" x1="100.9" y1="200.8" x2="100.9" y2="107.8"/>
+<path class="st2" d="M52.6,210.6"/>
+<g>
+	<path class="st5" d="M186.7,301H20.2c-3.5,0-6.3-2.8-6.3-6.3v-85.4c0-3.5,2.8-6.3,6.3-6.3h166.4c3.5,0,6.3,2.8,6.3,6.3v85.4
+		C193,298.2,190.1,301,186.7,301z"/>
+	<text transform="matrix(1 0 0 1 72.7264 273.2148)" class="st6 st7 st8 st9">z</text>
+	<text transform="matrix(1 0 0 1 100.8943 250.2734)" class="st6 st7 st10">-1</text>
+</g>
+<text transform="matrix(1 0 0 1 418.3022 368.8037)" class="st11 st7 st12">a</text>
+<text transform="matrix(1 0 0 1 442.2529 388.3115)" class="st11 st7 st13">1</text>
+<polygon class="st4" points="222.5,44.3 222.5,181.1 351.4,107 "/>
+<text transform="matrix(1 0 0 1 312.6103 172.8461)" class="st6 st7 st12">a</text>
+<text transform="matrix(1 0 0 1 336.561 192.3539)" class="st6 st7 st13">0</text>
+<text transform="matrix(1 0 0 1 312.6103 485.2976)" class="st6 st7 st12">a</text>
+<text transform="matrix(1 0 0 1 336.561 504.8054)" class="st6 st7 st13">1</text>
+<text transform="matrix(1 0 0 1 633.0491 484.4338)" class="st6 st7 st12">-b</text>
+<text transform="matrix(1 0 0 1 673.9998 503.9417)" class="st6 st7 st13">1</text>
+<g>
+	<circle class="st14" cx="552.3" cy="107.8" r="74.8"/>
+	<text transform="matrix(1 0 0 1 528.6152 128.6504)" class="st6 st7 st15 st9">Σ</text>
+</g>
+<path class="st0" d="M354.6,421.6h177.8c11,0,19.9-8.9,19.9-19.9v-89.8"/>
+</svg>

@@ -6,6 +6,15 @@
 #include "Gui/FirFilterComponent.h"
 #include "Gui/IirFilterComponent.h"
 
+class CustomTabbedComponent : public TabbedComponent
+{
+public:
+    CustomTabbedComponent(FilterBasicsAudioProcessor& p);
+    void currentTabChanged(int newCurrentTabIndex, const String& newCurrentTabName) override;
+private:
+    FilterBasicsAudioProcessor& processor;
+};
+
 class FilterBasicsAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
@@ -19,7 +28,7 @@ private:
     FilterBasicsAudioProcessor& audioProcessor;
     FirFilterComponent firFilterComponent;
     IirFilterComponent iirFilterComponent;
-    TabbedComponent tab{TabbedButtonBar::Orientation::TabsAtTop};
+    CustomTabbedComponent tab;
     CustomLookAndFeel lookAndFeel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterBasicsAudioProcessorEditor)

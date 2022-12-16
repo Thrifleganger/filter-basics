@@ -1,28 +1,9 @@
 #pragma once
 
 #include <JuceHeader.h>
-
-class FirFilter
-{
-public:
-    void prepare(int numChannels);
-    void process(AudioBuffer<float>& buffer);
-    void setCoefficients(float a0, float a1);
-private:
-    std::vector<float> channelRegister;
-    float a0{ 0.5f }, a1{ 0.5f };
-};
-
-class IirFilter
-{
-public:
-    void prepare(int numChannels);
-    void process(AudioBuffer<float>& buffer);
-    void setCoefficients(float a0, float a1, float b1);
-private:
-    std::vector<float> channelRegister;
-    float a0{ 0.5f }, a1{ 0.5f }, b1{ 0.5f };
-};
+#include "Config.h"
+#include "Dsp/FirFilter.h"
+#include "Dsp/IirFilter.h"
 
 enum class Topology {
     FIR, IIR
@@ -76,6 +57,9 @@ public:
     void calculateImpulseResponse(Topology topology);
     std::vector<float> getMagnitudeResponse();
     std::vector<float> getPhaseResponse();
+    void setIirFilterMode(IirFilter::Mode mode);
+    int getCurrentProcessorIndex() const;
+    void setCurrentProcessorIndex(int processorIndex);
 
 private:
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
@@ -86,8 +70,8 @@ private:
     FirFilter firFilter, firAnalysisFilter;
     IirFilter iirFilter, iirAnalysisFilter;
     dsp::FFT fft;
-    dsp::WindowingFunction<float> window;
     float sampleRate;
+    std::atomic<int> currentProcessor{ 0 };
 
     static constexpr int fftOrder{ 11 };
 

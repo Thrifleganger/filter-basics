@@ -12,4 +12,6 @@ protected:
 	void drawXAxisGuides(Graphics& g) override;
 	void drawYAxisGuides(Graphics& g) override;
 	String getPopupTextForNormalizedScopePosition(float x, float y) override;
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PhaseResponsePlot)
 };

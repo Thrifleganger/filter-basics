@@ -4,6 +4,13 @@
               jucerFormatVersion="1" cppLanguageStandard="17">
   <MAINGROUP id="J928KQ" name="FilterBasics">
     <GROUP id="{8D954F14-8ADB-9803-3FB8-2DD37E069A30}" name="Source">
+      <FILE id="mG7zsf" name="Config.h" compile="0" resource="0" file="Source/Config.h"/>
+      <GROUP id="{F0827AF6-FFD1-DCCB-7845-007D1B4835CD}" name="Dsp">
+        <FILE id="BDLw99" name="FirFilter.cpp" compile="1" resource="0" file="Source/Dsp/FirFilter.cpp"/>
+        <FILE id="onJDjT" name="FirFilter.h" compile="0" resource="0" file="Source/Dsp/FirFilter.h"/>
+        <FILE id="A2ygIu" name="IirFilter.cpp" compile="1" resource="0" file="Source/Dsp/IirFilter.cpp"/>
+        <FILE id="wSgnL0" name="IirFilter.h" compile="0" resource="0" file="Source/Dsp/IirFilter.h"/>
+      </GROUP>
       <GROUP id="{07509302-7544-2362-FFD0-4616805836AA}" name="Gui">
         <FILE id="GrQCDC" name="FirFilterComponent.cpp" compile="1" resource="0"
               file="Source/Gui/FirFilterComponent.cpp"/>
@@ -35,8 +42,13 @@
       <FILE id="jHT2CH" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <GROUP id="{47DCCAAC-DEDA-4FB7-C528-AAB550BDB519}" name="Resources">
+      <FILE id="pcZo9j" name="IirFilterDirectForm1.png" compile="0" resource="1"
+            file="Resources/IirFilterDirectForm1.png"/>
+      <FILE id="vPRin7" name="IirFilterDirectForm2.png" compile="0" resource="1"
+            file="Resources/IirFilterDirectForm2.png"/>
+      <FILE id="FOBaPr" name="IirFilterSimple.png" compile="0" resource="1"
+            file="Resources/IirFilterSimple.png"/>
       <FILE id="IyDqQZ" name="FirFilter.png" compile="0" resource="1" file="Resources/FirFilter.png"/>
-      <FILE id="gSZUOB" name="FirFilter.svg" compile="0" resource="1" file="Resources/FirFilter.svg"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>

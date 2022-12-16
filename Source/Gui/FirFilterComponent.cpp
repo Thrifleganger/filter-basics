@@ -38,8 +38,8 @@ FirFilterComponent::FirFilterComponent(FilterBasicsAudioProcessor& processor) :
         addAndMakeVisible(label);
         valueTreeState.addParameterListener(id, this);
     };
-    configureSlider(coeffA0Slider, "firCoeffA0", coeffA0Label);
-    configureSlider(coeffA1Slider, "firCoeffA1", coeffA1Label);
+    configureSlider(coeffA0Slider, Id::FIR::a0, coeffA0Label);
+    configureSlider(coeffA1Slider, Id::FIR::a1, coeffA1Label);
 
     addAndMakeVisible(magnitudeResponsePlot);
     addAndMakeVisible(phaseResponsePlot);
@@ -112,6 +112,6 @@ void FirFilterComponent::paint(Graphics& g)
 
 void FirFilterComponent::parameterChanged(const String& parameterID, float newValue)
 {
-    if (parameterID.equalsIgnoreCase("firCoeffA0") || parameterID.equalsIgnoreCase("firCoeffA1"))
+    if (parameterID.containsIgnoreCase("fir"))
         shouldRefreshGraphs = true;
 }
