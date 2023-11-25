@@ -50,7 +50,16 @@ IirFilterComponent::IirFilterComponent(FilterBasicsAudioProcessor& processor) :
     addAndMakeVisible(magnitudeResponsePlot);
     addAndMakeVisible(phaseResponsePlot);
 
+    magnitudeResponsePlot.setGainRange(-60.f, 30.f);
+
     startTimerHz(24);
+}
+
+IirFilterComponent::~IirFilterComponent()
+{
+    valueTreeState.removeParameterListener(Id::IIR::a0, this);
+    valueTreeState.removeParameterListener(Id::IIR::a1, this);
+    valueTreeState.removeParameterListener(Id::IIR::b1, this);
 }
 
 void IirFilterComponent::resized()

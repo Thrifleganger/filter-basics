@@ -23,6 +23,7 @@ class IirFilterComponent : public Component,
 {
 public:
     IirFilterComponent(FilterBasicsAudioProcessor& processor);
+    ~IirFilterComponent() override;
     void resized() override;
     void timerCallback() override;
     void paint(Graphics& g) override;

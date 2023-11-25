@@ -49,6 +49,12 @@ FirFilterComponent::FirFilterComponent(FilterBasicsAudioProcessor& processor) :
     startTimerHz(24);
 }
 
+FirFilterComponent::~FirFilterComponent()
+{
+    valueTreeState.removeParameterListener(Id::FIR::a0, this);
+    valueTreeState.removeParameterListener(Id::FIR::a1, this);
+}
+
 void FirFilterComponent::resized()
 {
     auto bounds = getLocalBounds();

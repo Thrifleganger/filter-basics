@@ -20,6 +20,7 @@ class FirFilterComponent : public Component, public Timer, public AudioProcessor
 {
 public:
     FirFilterComponent(FilterBasicsAudioProcessor& processor);
+    ~FirFilterComponent() override;
     void resized() override;
     void timerCallback() override;
     void paint(Graphics& g) override;

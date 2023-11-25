@@ -8,13 +8,14 @@ class FrequencyResponsePlot : public Plot
 public:
     FrequencyResponsePlot(std::function<std::vector<float>()> callback);
     void refresh() override;
+    void setGainRange(float minDbValue, float maxDbValue);
 protected:
     void drawXAxisGuides(Graphics& g) override;
     void drawYAxisGuides(Graphics& g) override;
     String getPopupTextForNormalizedScopePosition(float x, float y) override;
 
-    static constexpr float maxDb{ 10.f };
-    static constexpr float minDb{ -90.f };
+    float maxDb{ 10.f };
+    float minDb{ -90.f };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FrequencyResponsePlot)
 };

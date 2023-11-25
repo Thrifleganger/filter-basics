@@ -20,8 +20,8 @@ void PhaseResponsePlot::refresh()
         const auto x = jmap((float)i, 0.f, (float)data.size(), 0.f, 1.f);
         auto value = data[i];
         if (isnan(value) || isinf(value))
-            value = 360.f;
-        const auto y = jmap(value, -360.f, 360.f, 0.f, 1.f);
+            value = maxAngle;
+        const auto y = jmap(value, minAngle, maxAngle, 0.f, 1.f);
         if (i == 0)
             path.startNewSubPath(x, y);
         else 
@@ -32,6 +32,12 @@ void PhaseResponsePlot::refresh()
     path.applyTransform(transform);
 
     repaint();
+}
+
+void PhaseResponsePlot::setDegreeRange(float minDegreeValue, float maxDegreeValue)
+{
+    maxAngle = maxDegreeValue;
+    minAngle = minDegreeValue;
 }
 
 void PhaseResponsePlot::drawXAxisGuides(Graphics& g)
@@ -62,9 +68,8 @@ void PhaseResponsePlot::drawYAxisGuides(Graphics& g)
     g.setColour(Theme::axis.darker());
     g.setOpacity(0.5f);
 
-    const auto minAngle{ -360 }, maxAngle{ 360 };
     std::vector<int> yAxisGuides;
-    for (int i = minAngle; i <= maxAngle;)
+    for (int i = (int)minAngle; i <= (int)maxAngle;)
     {
         yAxisGuides.push_back(i);
         i += 60;
@@ -72,7 +77,7 @@ void PhaseResponsePlot::drawYAxisGuides(Graphics& g)
 
     for (const auto point : yAxisGuides)
     {
-        const auto y = scopeBounds.getHeight() - jmap(point, minAngle, maxAngle, 0, scopeBounds.getHeight());
+        const auto y = scopeBounds.getHeight() - jmap(point, (int)minAngle, (int)maxAngle, 0, scopeBounds.getHeight());
         g.drawLine(0, y, scopeBounds.getWidth(), y, 1.f);
 
         g.setFont(12.f);
@@ -84,5 +89,5 @@ void PhaseResponsePlot::drawYAxisGuides(Graphics& g)
 String PhaseResponsePlot::getPopupTextForNormalizedScopePosition(float x, float y)
 {
     return "Freq: " + String{ jmap(x, 0.f, sampleRate * 0.5f), 2 } + "Hz | "
-        + "Phase: " + String{ jmap(y, -360.f, 360.f), 2 } + String{ CharPointer_UTF8("\xc2\xb0") };
+        + "Phase: " + String{ jmap(y, minAngle, maxAngle), 2 } + String{ CharPointer_UTF8("\xc2\xb0") };
 }

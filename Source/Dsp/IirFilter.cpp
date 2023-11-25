@@ -21,7 +21,8 @@ void IirFilter::process(AudioBuffer<float>& buffer)
 			{
 				output = a0 * input -
 					b1 * channelRegister[channel];
-				if (isinf(output) || isnan(output))
+				// Filter has blown up, deal with it.
+				if (isinf(output) || isnan(output)) 
 					output = 10.f;
 				channelRegister[channel] = output;
 			}
@@ -30,6 +31,7 @@ void IirFilter::process(AudioBuffer<float>& buffer)
 				output = a0 * input +
 					a1 * channelRegisterExtra[channel] -
 					b1 * channelRegister[channel];
+				// Filter has blown up, deal with it.
 				if (isinf(output) || isnan(output))
 					output = 10.f;
 				channelRegister[channel] = output;
@@ -38,6 +40,7 @@ void IirFilter::process(AudioBuffer<float>& buffer)
 			else if (mode == Mode::DirectForm2)
 			{
 				auto v = input - b1 * channelRegister[channel];
+				// Filter has blown up, deal with it.
 				if (isinf(v) || isnan(v))
 					v = 10.f;
 				output = a0 * v + a1 * channelRegister[channel];
