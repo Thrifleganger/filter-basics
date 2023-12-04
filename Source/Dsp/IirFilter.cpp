@@ -22,7 +22,7 @@ void IirFilter::process(AudioBuffer<float>& buffer)
 				output = a0 * input -
 					b1 * channelRegister[channel];
 				// Filter has blown up, deal with it.
-				if (isinf(output) || isnan(output)) 
+				if (isinf(output) || isnan(output))
 					output = 10.f;
 				channelRegister[channel] = output;
 			}
