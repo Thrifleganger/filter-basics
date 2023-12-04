@@ -213,7 +213,7 @@ AudioProcessorValueTreeState::ParameterLayout FilterBasicsAudioProcessor::create
 		std::make_unique<AudioParameterFloat>(ParameterID{Id::IIR::a1, 1}, "IIR Coefficient A1",
 											  NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
 		std::make_unique<AudioParameterFloat>(ParameterID{Id::IIR::b1, 1}, "IIR Coefficient B1",
-											  NormalisableRange<float>{-2.f, 2.f, 0.01f}, 0.5f),
+											  NormalisableRange<float>{-1.2f, 1.2f, 0.01f}, 0.5f),
 		std::make_unique<AudioParameterInt>(ParameterID{Id::tab, 1}, "Processor Tab", 0, 1, 0),
 	};
 }

@@ -36,6 +36,12 @@ void FrequencyResponsePlot::refresh()
     repaint();
 }
 
+void FrequencyResponsePlot::setGainRange(float minDbValue, float maxDbValue)
+{
+    maxDb = maxDbValue;
+    minDb = minDbValue;
+}
+
 void FrequencyResponsePlot::drawXAxisGuides(Graphics& g)
 {
     g.setColour(Theme::axis.darker());
