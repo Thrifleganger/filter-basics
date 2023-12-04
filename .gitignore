@@ -2,5 +2,6 @@
 **/Builds/
 **/JuceLibraryCode/
 **/.ipynb_checkpoints/
+**/.virtual_documents/
 *.exe
 *.pkg
